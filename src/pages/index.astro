@@ -1,0 +1,429 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TAGLINE, PARENT, CTA } from '../consts';
+
+// Homepage is static — only /api/check runs on demand.
+export const prerender = true;
+---
+
+<BaseLayout>
+  <header class="border-b border-[var(--color-rule)] bg-[var(--color-paper-soft)]">
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-6 py-3.5">
+      <a
+        href={PARENT.url}
+        class="font-display text-[1.1rem] text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]"
+        >{PARENT.name}</a
+      >
+      <span class="font-mono text-[0.7rem] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+        Product Data Audit
+      </span>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-3xl px-6 py-14 sm:py-20">
+    <!-- Hero -->
+    <section class="rise">
+      <span class="badge">Product Data Audit</span>
+      <h1
+        class="font-display dot mt-6 text-[clamp(2.1rem,6vw,3.3rem)] leading-[1.05] text-[var(--color-ink)]"
+      >
+        How clean is your product data?
+      </h1>
+      <p class="mt-5 max-w-xl text-[1.1rem] leading-[1.6] text-[var(--color-ink-soft)]">
+        {SITE_TAGLINE} Upload a product CSV and get a free report on completeness,
+        content quality and consistency — every gap counted, with how to fix it.
+      </p>
+
+      <!-- Upload -->
+      <form id="check-form" class="mt-8">
+        <label
+          id="dropzone"
+          for="file-input"
+          class="flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-[var(--color-rule)] bg-[var(--color-paper-soft)] px-6 py-12 text-center transition-colors hover:border-[var(--color-accent)]"
+        >
+          <svg
+            class="size-9 text-[var(--color-accent)]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 16V4M7 9l5-5 5 5" />
+            <path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2" />
+          </svg>
+          <span class="mt-3 text-[1.02rem] font-semibold text-[var(--color-ink)]">
+            Drop a product CSV here, or click to choose
+          </span>
+          <span class="mt-1 text-[0.88rem] text-[var(--color-muted)]">
+            CSV file, up to 8 MB. Comma or semicolon delimited.
+          </span>
+        </label>
+        <input
+          id="file-input"
+          type="file"
+          name="file"
+          accept=".csv,text/csv,text/plain"
+          class="sr-only"
+        />
+      </form>
+
+      <p class="mt-3 text-[0.92rem] text-[var(--color-ink-soft)]">
+        No catalog handy?
+        <button
+          id="sample-btn"
+          type="button"
+          class="font-semibold text-[var(--color-accent)] underline underline-offset-2 hover:text-[var(--color-accent-hover)]"
+        >
+          Try a sample catalog
+        </button>.
+      </p>
+      <p id="form-error" class="mt-3 hidden text-[0.92rem] font-medium text-[var(--color-fail)]"></p>
+
+      <p class="mt-4 text-[0.86rem] text-[var(--color-muted)]">
+        Your file is parsed in memory to produce the report and is never stored. No signup.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section id="results" class="mt-12 hidden" aria-live="polite"></section>
+
+    <!-- What we check -->
+    <section id="explainer" class="mt-14 border-t border-[var(--color-rule)] pt-10">
+      <h2 class="font-display text-[1.4rem] text-[var(--color-ink)]">What this checks</h2>
+      <div class="mt-6 grid gap-5 sm:grid-cols-3">
+        <div>
+          <h3 class="text-[1rem] font-semibold text-[var(--color-ink)]">Completeness</h3>
+          <p class="mt-1.5 text-[0.92rem] leading-[1.55] text-[var(--color-ink-soft)]">
+            Titles, descriptions, prices, images and SKUs — the fields every product needs.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-[1rem] font-semibold text-[var(--color-ink)]">Content quality</h3>
+          <p class="mt-1.5 text-[0.92rem] leading-[1.55] text-[var(--color-ink-soft)]">
+            Title length, description depth, valid prices and real image URLs.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-[1rem] font-semibold text-[var(--color-ink)]">Consistency</h3>
+          <p class="mt-1.5 text-[0.92rem] leading-[1.55] text-[var(--color-ink-soft)]">
+            Duplicate SKUs and titles, plus the brand and GTIN identifiers channels require.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA (hidden once a result is shown — the result carries its own) -->
+    <section
+      id="cta"
+      class="mt-14 rounded-2xl border border-[var(--color-accent-soft)] bg-[var(--color-accent-tint)] p-7 sm:p-8"
+    >
+      <h2 class="font-display text-[1.4rem] text-[var(--color-ink)]">Catalog a mess?</h2>
+      <p class="mt-2 max-w-xl text-[0.98rem] leading-[1.55] text-[var(--color-ink-soft)]">
+        kant.dev is a technical partner for AI, MDM/PIM and business automation. We clean up
+        product data and build the systems that keep it clean.
+      </p>
+      <a
+        href={CTA.url}
+        class="mt-5 inline-flex items-center gap-2 rounded-2xl bg-[var(--color-accent)] px-6 py-3 text-[0.98rem] font-semibold text-white transition-colors hover:bg-[var(--color-accent-hover)]"
+      >
+        {CTA.label}
+        <span aria-hidden="true">→</span>
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t border-[var(--color-rule)] pt-6 text-[0.88rem] text-[var(--color-muted)]">
+      <p>
+        A <a
+          href={PARENT.url}
+          class="font-semibold text-[var(--color-ink-soft)] underline decoration-[var(--color-accent-soft)] underline-offset-2 hover:decoration-[var(--color-accent)]"
+          >{PARENT.name}</a
+        > product — technical partner for AI, MDM/PIM and business automation.
+      </p>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .gauge {
+    position: relative;
+    width: 116px;
+    height: 116px;
+    flex: none;
+    border-radius: 9999px;
+    display: grid;
+    place-items: center;
+    background: conic-gradient(
+      var(--gauge-color) calc(var(--gauge-pct) * 1%),
+      var(--color-rule) 0
+    );
+  }
+  .gauge__hole {
+    width: 86px;
+    height: 86px;
+    border-radius: 9999px;
+    background: var(--color-paper);
+    display: grid;
+    place-items: center;
+    line-height: 1;
+  }
+  .gauge__num {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+  .check-fix {
+    border-left: 2px solid var(--color-accent-soft);
+  }
+  #dropzone.is-drag {
+    border-color: var(--color-accent);
+    background: var(--color-accent-tint);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .gauge {
+      transition: background 0.6s ease;
+    }
+  }
+</style>
+
+<script>
+  import type { CatalogResult, Category, Check, CheckStatus } from '../lib/check';
+  import { CTA } from '../consts';
+
+  const form = document.getElementById('check-form') as HTMLFormElement;
+  const dropzone = document.getElementById('dropzone') as HTMLLabelElement;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const sampleBtn = document.getElementById('sample-btn') as HTMLButtonElement;
+  const errorEl = document.getElementById('form-error') as HTMLParagraphElement;
+  const results = document.getElementById('results') as HTMLElement;
+  const explainer = document.getElementById('explainer') as HTMLElement;
+  const cta = document.getElementById('cta') as HTMLElement;
+
+  const STATUS: Record<CheckStatus, { icon: string; color: string }> = {
+    pass: { icon: '✓', color: 'var(--color-pass)' },
+    warn: { icon: '!', color: 'var(--color-warn)' },
+    fail: { icon: '✕', color: 'var(--color-fail)' },
+  };
+
+  const FIELD_LABEL: Record<string, string> = {
+    title: 'title',
+    description: 'description',
+    price: 'price',
+    image: 'image',
+    sku: 'SKU',
+    brand: 'brand',
+    category: 'category',
+    gtin: 'GTIN',
+  };
+
+  function esc(s: string): string {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+  }
+
+  function bandColor(band: CatalogResult['band']): string {
+    if (band === 'strong') return 'var(--color-pass)';
+    if (band === 'fair') return 'var(--color-warn)';
+    return 'var(--color-fail)';
+  }
+
+  function bandLabel(band: CatalogResult['band']): string {
+    if (band === 'strong') return 'Strong';
+    if (band === 'fair') return 'Fair';
+    return 'Needs work';
+  }
+
+  function renderCheck(check: Check): string {
+    const s = STATUS[check.status];
+    const examples =
+      check.examples.length > 0
+        ? `<p class="mt-1.5 text-[0.84rem] text-[var(--color-muted)]">
+             e.g. ${check.examples.map(esc).join(' · ')}
+           </p>`
+        : '';
+    const fix =
+      check.status === 'pass'
+        ? ''
+        : `<p class="check-fix mt-2 pl-3 text-[0.9rem] leading-[1.5] text-[var(--color-ink-soft)]">
+             <span class="font-semibold text-[var(--color-ink)]">Fix:</span> ${esc(check.fix)}
+           </p>`;
+    return `
+      <li class="border-t border-[var(--color-rule)] py-4 first:border-t-0">
+        <div class="flex items-start gap-3">
+          <span
+            class="mt-0.5 grid size-5 flex-none place-items-center rounded-full text-[0.7rem] font-bold text-white"
+            style="background:${s.color}"
+            aria-hidden="true"
+          >${s.icon}</span>
+          <div class="min-w-0">
+            <p class="text-[0.98rem] font-semibold text-[var(--color-ink)]">${esc(check.label)}</p>
+            <p class="mt-0.5 text-[0.9rem] leading-[1.5] text-[var(--color-ink-soft)]">${esc(check.detail)}</p>
+            ${examples}
+            ${fix}
+          </div>
+        </div>
+      </li>`;
+  }
+
+  function renderCategory(cat: Category): string {
+    return `
+      <div class="mt-8">
+        <div class="flex items-baseline justify-between gap-4">
+          <h3 class="font-display text-[1.25rem] text-[var(--color-ink)]">${esc(cat.title)}</h3>
+          <span class="font-mono text-[0.85rem] font-semibold text-[var(--color-muted)]">${cat.score}/100</span>
+        </div>
+        <p class="mt-1 text-[0.9rem] text-[var(--color-muted)]">${esc(cat.blurb)}</p>
+        <ul class="mt-3 rounded-2xl border border-[var(--color-rule)] bg-[var(--color-paper-soft)] px-5">
+          ${cat.checks.map(renderCheck).join('')}
+        </ul>
+      </div>`;
+  }
+
+  function renderResult(r: CatalogResult): string {
+    const mapped = r.mapped.map((f) => FIELD_LABEL[f] ?? f).join(', ');
+    const unmapped =
+      r.unmapped.length > 0
+        ? `<p class="mt-1 text-[0.85rem] text-[var(--color-muted)]">
+             Columns not recognised: ${esc(r.unmapped.join(', '))}
+           </p>`
+        : '';
+    return `
+      <div class="rise rounded-2xl border border-[var(--color-rule)] bg-[var(--color-paper-soft)] p-6 sm:p-8">
+        <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <div class="gauge" style="--gauge-pct:${r.score};--gauge-color:${bandColor(r.band)}">
+            <div class="gauge__hole"><span class="gauge__num">${r.score}</span></div>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[0.78rem] font-semibold uppercase tracking-[0.16em]" style="color:${bandColor(r.band)}">
+              ${bandLabel(r.band)} catalog data
+            </p>
+            <p class="mt-1.5 text-[1.05rem] leading-[1.5] text-[var(--color-ink)]">${esc(r.summary)}</p>
+            <p class="mt-2 break-words text-[0.85rem] text-[var(--color-muted)]">
+              ${esc(r.fileName)} · ${r.rowCount} products · ${r.columnCount} columns
+            </p>
+          </div>
+        </div>
+        <div class="mt-5 border-t border-[var(--color-rule)] pt-4">
+          <p class="text-[0.85rem] text-[var(--color-ink-soft)]">
+            <span class="font-semibold text-[var(--color-ink)]">Recognised fields:</span> ${esc(mapped)}
+          </p>
+          ${unmapped}
+        </div>
+      </div>
+      ${r.categories.map(renderCategory).join('')}
+      <div class="mt-8 rounded-2xl border border-[var(--color-accent-soft)] bg-[var(--color-accent-tint)] p-6 sm:p-7">
+        <h3 class="font-display text-[1.3rem] text-[var(--color-ink)]">Want this cleaned up?</h3>
+        <p class="mt-1.5 text-[0.95rem] leading-[1.55] text-[var(--color-ink-soft)]">
+          kant.dev is a technical partner for AI, MDM/PIM and business automation —
+          we fix product data at the source and build the systems that keep it clean.
+        </p>
+        <a
+          href="${esc(CTA.url)}"
+          class="mt-4 inline-flex items-center gap-2 rounded-2xl bg-[var(--color-accent)] px-5 py-3 text-[0.95rem] font-semibold text-white transition-colors hover:bg-[var(--color-accent-hover)]"
+        >${esc(CTA.label)} <span aria-hidden="true">→</span></a>
+      </div>
+      <p class="mt-4 text-[0.84rem] text-[var(--color-muted)]">
+        Audits the file as uploaded. It does not yet check images resolve or prices
+        sit within a sane range — deeper checks are planned.
+      </p>`;
+  }
+
+  function showError(msg: string): void {
+    errorEl.textContent = msg;
+    errorEl.classList.remove('hidden');
+  }
+
+  function setLoading(loading: boolean): void {
+    sampleBtn.disabled = loading;
+    fileInput.disabled = loading;
+    if (loading) {
+      dropzone.setAttribute('aria-busy', 'true');
+    } else {
+      dropzone.removeAttribute('aria-busy');
+    }
+  }
+
+  const MAX_BYTES = 8 * 1024 * 1024;
+
+  async function submitFile(file: File): Promise<void> {
+    errorEl.classList.add('hidden');
+    if (file.size === 0) {
+      showError('That file is empty.');
+      return;
+    }
+    if (file.size > MAX_BYTES) {
+      showError('That file is too large. The limit is 8 MB.');
+      return;
+    }
+    setLoading(true);
+    try {
+      const csv = await file.text();
+      const res = await fetch('/api/check', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ fileName: file.name, csv }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        showError(typeof data?.error === 'string' ? data.error : 'Check failed. Try again.');
+        return;
+      }
+      explainer.classList.add('hidden');
+      cta.classList.add('hidden');
+      results.innerHTML = renderResult(data as CatalogResult);
+      results.classList.remove('hidden');
+      results.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } catch {
+      showError('Network error — could not reach the check service.');
+    } finally {
+      setLoading(false);
+      fileInput.value = '';
+    }
+  }
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (file) void submitFile(file);
+  });
+
+  // Drag-and-drop onto the dropzone.
+  ['dragenter', 'dragover'].forEach((evt) =>
+    dropzone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      dropzone.classList.add('is-drag');
+    }),
+  );
+  ['dragleave', 'drop'].forEach((evt) =>
+    dropzone.addEventListener(evt, (e) => {
+      e.preventDefault();
+      dropzone.classList.remove('is-drag');
+    }),
+  );
+  dropzone.addEventListener('drop', (e) => {
+    const file = (e as DragEvent).dataTransfer?.files?.[0];
+    if (file) void submitFile(file);
+  });
+
+  sampleBtn.addEventListener('click', async () => {
+    errorEl.classList.add('hidden');
+    setLoading(true);
+    try {
+      const res = await fetch('/sample-catalog.csv');
+      if (!res.ok) throw new Error('sample fetch failed');
+      const blob = await res.blob();
+      const file = new File([blob], 'sample-catalog.csv', { type: 'text/csv' });
+      await submitFile(file);
+    } catch {
+      showError('Could not load the sample catalog.');
+      setLoading(false);
+    }
+  });
+
+  // Guard against a stray form submit (Enter key, etc.).
+  form.addEventListener('submit', (e) => e.preventDefault());
+</script>

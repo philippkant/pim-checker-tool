@@ -1,0 +1,17 @@
+SKU,Product Name,Description,Price,Brand,Image URL,Category,EAN
+CM-001,"Stovetop Espresso Maker 6-Cup","Classic aluminium moka pot that brews rich stovetop espresso for up to six cups. Heat-resistant handle and a precision safety valve.",34.90,Bialetti,https://example.com/img/cm-001.jpg,Coffee,8006363011655
+CM-002,"Ceramic Pour-Over Dripper","Cone-shaped ceramic dripper with spiral ribs for an even extraction. Fits standard size-02 paper filters.",22.00,Hario,https://example.com/img/cm-002.jpg,Coffee,4977642723009
+CM-003,"Gooseneck Kettle 1.2L Matte Black",,49.99,Fellow,https://example.com/img/cm-003.jpg,Kettles,0850012103019
+CM-004,"Burr Coffee Grinder","Nice grinder.",89.00,Baratza,https://example.com/img/cm-004.jpg,Grinders,0875284002016
+CM-005,"Double-Wall Glass Mug 350ml","Borosilicate double-wall mug that keeps drinks hot and the outside cool to the touch. Dishwasher safe.",12.50,,https://example.com/img/cm-005.jpg,Mugs,
+CM-006,"French Press 8-Cup Stainless Steel","Insulated stainless-steel French press with a fine three-part filter for a clean, full-bodied brew.",,Bodum,https://example.com/img/cm-006.jpg,Coffee,4006381300018
+CM-001,"Milk Frother Handheld","Battery-powered handheld frother that whips dense microfoam for lattes and cappuccinos in seconds.",15.99,Bialetti,https://example.com/img/cm-007.jpg,Accessories,8006363021654
+CM-008,"Reusable Coffee Filter","Stainless-steel mesh filter that replaces paper filters for cone drippers. Rinse and reuse.",9.90,,filter.jpg,Accessories,
+CM-009,"Hario V60 Range Server and Ceramic Dripper Complete Pour-Over Coffee Brewing Set with Measuring Spoon and Forty Paper Filters for Home and Office Baristas Who Want Cafe Quality","Everything needed to start brewing pour-over coffee at home in one boxed set.",27.00,Hario,https://example.com/img/cm-009.jpg,Coffee,4977642729001
+CM-010,"Cold Brew Carafe 1L",,TBD,OXO,https://example.com/img/cm-010.jpg,Coffee,
+CM-011,"Coffee Scale with Timer","Compact brewing scale with a built-in timer, 0.1 g resolution and a fast auto-tare for precise pour-over ratios.",39.00,Timemore,https://example.com/img/cm-011.jpg,Accessories,6974090590117
+CM-012,"Espresso Tamper 51mm","Solid stainless-steel tamper with a 51 mm flat base and an ergonomic wooden handle.",18.00,,https://example.com/img/cm-012.jpg,Accessories,
+CM-013,"Knock Box Stainless","Knock box.",24.00,Rhino,https://example.com/img/cm-013.jpg,Accessories,9421902051034
+CM-014,"Travel Mug 470ml Vacuum Insulated","Leakproof vacuum-insulated travel mug that keeps coffee hot for up to seven hours. Fits most car cup holders.",29.99,Stanley,https://example.com/img/cm-014.jpg,Mugs,0041604000010
+CM-015,"Drip Coffee Maker 12-Cup Programmable","Programmable 12-cup drip machine with a 24-hour timer, brew-strength control and a reusable gold-tone filter.",79.00,Cuisinart,,Machines,0086279000019
+CM-016,"Single-Origin Whole Bean Coffee 1kg","Medium-roast single-origin whole beans with tasting notes of cocoa, dried fig and toasted almond.",32.00,,https://example.com/img/cm-016.jpg,Beans,

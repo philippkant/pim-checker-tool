@@ -1,0 +1,29 @@
+{
+  "name": "pim-checker",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/node": "^9.1.0",
+    "@fontsource-variable/fraunces": "^5.2.9",
+    "@fontsource-variable/geist": "^5.2.8",
+    "@fontsource-variable/geist-mono": "^5.2.7",
+    "@tailwindcss/vite": "^4.1.0",
+    "astro": "^5.7.0",
+    "papaparse": "^5.4.1",
+    "tailwindcss": "^4.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@types/papaparse": "^5.3.14",
+    "typescript": "^5.7.3"
+  }
+}
